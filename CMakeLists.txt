@@ -52,7 +52,7 @@ project(${PACKAGE_NAME} C CXX)
 option(gRPC_BUILD_TESTS "Build tests" OFF)
 
 if (NOT MSVC)
-  set(gRPC_INSTALL ON CACHE BOOL "Generate installation target")
+  set(gRPC_INSTALL OFF CACHE BOOL "Generate installation target")
 else()
   set(gRPC_INSTALL OFF CACHE BOOL "Generate installation target")
 endif()
