@@ -2040,52 +2040,52 @@ endforeach()
 
 endif (gRPC_BUILD_TESTS)
 
-add_library(grpc++_reflection
-  src/cpp/ext/proto_server_reflection.cc
-  src/cpp/ext/proto_server_reflection_plugin.cc
-  ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/reflection/v1alpha/reflection.pb.cc
-  ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/reflection/v1alpha/reflection.grpc.pb.cc
-  ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/reflection/v1alpha/reflection.pb.h
-  ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/reflection/v1alpha/reflection.grpc.pb.h
-)
-
-protobuf_generate_grpc_cpp(
-  src/proto/grpc/reflection/v1alpha/reflection.proto
-)
-
-target_include_directories(grpc++_reflection
-  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
-  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
-  PRIVATE ${BORINGSSL_ROOT_DIR}/include
-  PRIVATE ${PROTOBUF_ROOT_DIR}/src
-  PRIVATE ${ZLIB_INCLUDE_DIR}
-  PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/third_party/zlib
-  PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/third_party/gflags/include
-  PRIVATE ${_gRPC_PROTO_GENS_DIR}
-)
-
-target_link_libraries(grpc++_reflection
-  grpc++
-)
-
-foreach(_hdr
-  include/grpc++/ext/proto_server_reflection_plugin.h
-)
-  string(REPLACE "include/" "" _path ${_hdr})
-  get_filename_component(_path ${_path} PATH)
-  install(FILES ${_hdr}
-    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${_path}"
-  )
-endforeach()
-
-
-if (gRPC_INSTALL)
-  install(TARGETS grpc++_reflection EXPORT gRPCTargets
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  )
-endif()
+#add_library(grpc++_reflection
+#  src/cpp/ext/proto_server_reflection.cc
+#  src/cpp/ext/proto_server_reflection_plugin.cc
+#  ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/reflection/v1alpha/reflection.pb.cc
+#  ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/reflection/v1alpha/reflection.grpc.pb.cc
+#  ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/reflection/v1alpha/reflection.pb.h
+#  ${_gRPC_PROTO_GENS_DIR}/src/proto/grpc/reflection/v1alpha/reflection.grpc.pb.h
+#)
+#
+#protobuf_generate_grpc_cpp(
+#  src/proto/grpc/reflection/v1alpha/reflection.proto
+#)
+#
+#target_include_directories(grpc++_reflection
+#  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+#  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
+#  PRIVATE ${BORINGSSL_ROOT_DIR}/include
+#  PRIVATE ${PROTOBUF_ROOT_DIR}/src
+#  PRIVATE ${ZLIB_INCLUDE_DIR}
+#  PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/third_party/zlib
+#  PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/third_party/gflags/include
+#  PRIVATE ${_gRPC_PROTO_GENS_DIR}
+#)
+#
+#target_link_libraries(grpc++_reflection
+#  grpc++
+#)
+#
+#foreach(_hdr
+#  include/grpc++/ext/proto_server_reflection_plugin.h
+#)
+#  string(REPLACE "include/" "" _path ${_hdr})
+#  get_filename_component(_path ${_path} PATH)
+#  install(FILES ${_hdr}
+#    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${_path}"
+#  )
+#endforeach()
+#
+#
+#if (gRPC_INSTALL)
+#  install(TARGETS grpc++_reflection EXPORT gRPCTargets
+#    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+#    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+#  )
+#endif()
 
 if (gRPC_BUILD_TESTS)
 
