@@ -507,11 +507,14 @@ static EVP_PKEY *pkey_from_jwk(grpc_exec_ctx *exec_ctx, const grpc_json *json,
           bignum_from_base64(exec_ctx, validate_string_field(key_prop, "e"));
       if (rsa->e == NULL) goto end;
     }
-  }*/
+  }
   if (rsa->e == NULL || rsa->n == NULL) {
     gpr_log(GPR_ERROR, "Missing RSA public key field.");
     goto end;
-  }
+  }*/
+  gpr_log(GPR_ERROR, "Code block commented due to OpenSSL incompatibility");
+  goto end;
+
   result = EVP_PKEY_new();
   EVP_PKEY_set1_RSA(result, rsa); /* uprefs rsa. */
 
