@@ -495,7 +495,9 @@ static EVP_PKEY *pkey_from_jwk(grpc_exec_ctx *exec_ctx, const grpc_json *json,
     gpr_log(GPR_ERROR, "Could not create rsa key.");
     goto end;
   }
-  for (key_prop = json->child; key_prop != NULL; key_prop = key_prop->next) {
+  // Below code block commented as accessing RSA object's modulus and exponent field directly
+  // is not supported in latest OpenSSL version
+  /*for (key_prop = json->child; key_prop != NULL; key_prop = key_prop->next) {
     if (strcmp(key_prop->key, "n") == 0) {
       rsa->n =
           bignum_from_base64(exec_ctx, validate_string_field(key_prop, "n"));
@@ -505,7 +507,7 @@ static EVP_PKEY *pkey_from_jwk(grpc_exec_ctx *exec_ctx, const grpc_json *json,
           bignum_from_base64(exec_ctx, validate_string_field(key_prop, "e"));
       if (rsa->e == NULL) goto end;
     }
-  }
+  }*/
   if (rsa->e == NULL || rsa->n == NULL) {
     gpr_log(GPR_ERROR, "Missing RSA public key field.");
     goto end;
