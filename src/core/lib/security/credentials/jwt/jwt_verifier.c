@@ -463,6 +463,7 @@ end:
   return result;
 }
 
+/*
 static BIGNUM *bignum_from_base64(grpc_exec_ctx *exec_ctx, const char *b64) {
   BIGNUM *result = NULL;
   grpc_slice bin;
@@ -478,10 +479,11 @@ static BIGNUM *bignum_from_base64(grpc_exec_ctx *exec_ctx, const char *b64) {
   grpc_slice_unref_internal(exec_ctx, bin);
   return result;
 }
+*/
 
 static EVP_PKEY *pkey_from_jwk(grpc_exec_ctx *exec_ctx, const grpc_json *json,
                                const char *kty) {
-  const grpc_json *key_prop;
+  //const grpc_json *key_prop;
   RSA *rsa = NULL;
   EVP_PKEY *result = NULL;
 
