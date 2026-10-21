@@ -40,7 +40,11 @@
 #include <time.h>
 #include <unistd.h>
 
+// glibc >= 2.30 declares its own gettid(); avoid redeclaring it then, since the
+// two conflict (mismatched linkage) and fail to compile together.
+#if !(defined(__GLIBC_PREREQ) && __GLIBC_PREREQ(2, 30))
 static long gettid(void) { return syscall(__NR_gettid); }
+#endif
 
 void gpr_log(const char* file, int line, gpr_log_severity severity,
              const char* format, ...) {

@@ -1102,7 +1102,11 @@ static void end_worker(grpc_pollset* pollset, grpc_pollset_worker* worker,
 }
 
 #ifndef NDEBUG
+// glibc >= 2.30 declares its own gettid(); avoid redeclaring it then, since the
+// two conflict (mismatched linkage) and fail to compile together.
+#if !(defined(__GLIBC_PREREQ) && __GLIBC_PREREQ(2, 30))
 static long gettid(void) { return syscall(__NR_gettid); }
+#endif
 #endif
 
 /* pollset->mu lock must be held by the caller before calling this.
